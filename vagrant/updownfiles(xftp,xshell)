@@ -11,7 +11,8 @@
 四、需要public key的情况
   1、进入ROOT权限；
   2、编辑配置文件sshd_config，命令：vim /etc/ssh/sshd_config
-  3、找到PasswordAuthentication，将PasswordAuthentication后面的单词改为yes(原本应该是no)，然后重启sshd服务：
+  3、方式一、找到PasswordAuthentication，将PasswordAuthentication后面的单词改为yes(原本应该是no)，然后重启sshd服务：
+     方式二、把下面的PasswordAuthentication no 改为yes；
   4、重启命令：service ssh restart(centos6使用，centos7使用：systemctl restart sshd)
 五、SSH服务器拒绝访问密码
   1、不用ROOT用户；
