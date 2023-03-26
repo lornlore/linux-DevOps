@@ -1,0 +1,41 @@
+1.先在网络部分注释掉单机连接那一行,即注释掉bind 127.0.0.1 
+2.同样我们要将后台运行打开：daemonize no，设置为yes。
+3.将 保护模式关闭：protected-mode yes 改为：protected-mode no 
+
+
+4.打开RDB持久化配置：
+#RDB持久化策略 默认三种方式，[900秒内有1次修改],
+#[300秒内有10次修改],[60秒内有10000次修改]即触发RDB持久化，
+#我们可以手动修改该参数或新增策略
+save 900 1
+save 300 10
+save 60 10000 
+#RDB文件名
+dbfilename dump.rdb
+#RDB文件存储路径
+dir ./
+策略配置：
+#在seconds秒内有changes次数据修改就触发RDB持久化
+
+
+5.开启AOF持久化配置
+appendonly yes
+#AOF文件名
+appendfilename "appendonly.aof"
+#AOF文件存储路径 与RDB是同一个参数,共用一个文件路径
+dir ./  #即bin目录下
+#AOF策略，一般都是选择第一种[always:每个命令都记录],
+#[everysec:每秒记录一次],[no:看机器的心情高兴了就记录，linux一般半个小时同步一次]
+#appendfsync always
+appendfsync everysec
+# appendfsync no
+#aof文件大小比起上次重写时的大小,增长100%(配置可以大于100%)时,触发重写。
+#[假如上次重写后大小为10MB，当AOF文件达到20MB时也会再次触发重写，以此类推
+auto-aof-rewrite-percentage 100 
+#aof文件大小超过64MB*2时,触发重写，
+#为何要乘以2，因为auto-aof-rewrite-percentage 100 是翻倍即100%，
+#达到翻倍时才重写
+auto-aof-rewrite-min-size 64mb 
+
+6.打开混合持久化：
+#6.aof-use-rdb-preamble yes # 检查混合持久化是否打开，redis5.0后默认开启
