@@ -1,0 +1,19 @@
+一.查看服务是否开启
+  在终端处输入命令:ps -e | grep ssh
+  需要显示sshd服务和ssh-agent服务都存在，可以连接虚拟机。
+二、开启sshd服务
+  启动命令:/etc/init.d/ssh start
+  安装命令:sudo apt-get install openssh-server
+三、开启ssh-agent服务
+  输入命令：eval 'ssh-agent'
+  sshd服务与ssh-agent服务都打开之后，xftp及xshell等工具即可进行连接；
+  
+四、需要public key的情况
+  1、进入ROOT权限；
+  2、编辑配置文件sshd_config，命令：vim /etc/ssh/sshd_config
+  3、找到PasswordAuthentication，将PasswordAuthentication后面的单词改为yes(原本应该是no)，然后重启sshd服务：
+  4、重启命令：service ssh restart
+五、SSH服务器拒绝访问密码
+  1、不用ROOT用户；
+  2、xshell配置中，连接-SSH-隧道-终端类型，选择linux;
+  
