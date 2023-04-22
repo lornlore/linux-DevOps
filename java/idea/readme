@@ -1,0 +1,6 @@
+idea激活
+1、拷贝jetbrains-agent.jar文件
+2、打开idea试用，修改>Help->Edit Custom VM Options选项；
+3、加上一行：-javaagent:D:\Program Files\JetBrains\jetbrains-agent.jar（具体以文件目录为准）
+4、再次点开register选项进入激活界面；
+5、选用server激活方式，输入https://fls.jetbrains-agent.com进行激活；
